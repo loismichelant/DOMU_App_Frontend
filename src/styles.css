@@ -1,1 +1,338 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #EBF9F6;
+    margin: 0;
+    font-family: monospace;
+}
+
+.parent-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-form {  
+    width: 65%;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #48C9B0;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.form-title {
+    color: #C94862;
+    font-size: 50px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.form-input {
+    border: none;
+    border-radius: 8px;
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.form-button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 30px 10px 30px;
+    background-color: #C94862;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+.form-link {
+    color: white;
+    padding-top: 15px;
+}
+.form-link-a {
+    color: white;
+    font-weight: bold;
+}
+
+.loading-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #48C9B0;
+    align-items: center;
+}
+
+.dash-parent-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-top {
+    width: 100%;
+    background-color: #48C9B0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-title {
+    color: white;
+    font-size: 28px;
+    font-family: monospace;
+    letter-spacing: 2px;
+    margin: 5px 0 10px 0;
+}
+
+.dash-subtitle {
+    color: #FDEDEC;
+    font-size: 16px;
+    margin: 0 0 0 5px;
+    font-family: monospace;
+}
+
+.logout-btn {
+    background-color: white;
+    font-family: monospace;
+    font-size: 18px;
+    color: #48C9B0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* MAIN GRID */
+.dashboard-layout {
+    width: 100%; /* 🔥 important */
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+}
+
+/* LEFT SIDEBAR */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: white;
+    padding: 15px;
+}
+
+/* RIGHT CONTENT */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.sidebar-section {
+    padding: 5px 0;
+}
+
+.sidebar-section h3 {
+    font-size: 16px;
+    color: #C94862;
+    margin-bottom: 6px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #C94862;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 15px;
+}
+
+.dash-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: 0.2s;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* LEFT */
+.task-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* TEXT */
+.task-title {
+    font-weight: bold;
+}
+
+.task-desc {
+    color: #777;
+}
+
+.task-user {
+    color: #48C9B0;
+}
+
+/* RIGHT BUTTONS */
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.task-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.task-actions img {
+    width: 18px;
+    height: 18px;
+}
+.task-row:hover {
+    background-color: #f9f9f9;
+}
+
+.expense-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.expense-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* LEFT */
+.expense-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* TEXT */
+.expense-title {
+    font-weight: bold;
+}
+
+.expense-user {
+    color: #777;
+}
+
+.expense-amount {
+    color: #48C9B0;
+    font-weight: bold;
+}
+
+/* RIGHT */
+.expense-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.expense-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.expense-actions img {
+    width: 18px;
+}
+
+.expense-row:hover {
+    background-color: #f9f9f9;
+}
+
+.debts-box {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.debt-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.debt-amount {
+    color: #C94862;
+    font-weight: bold;
+}
+
+.expense-split {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.split-label {
+    color: #999;
+}
+
+.split-user {
+    background-color: #EBF9F6;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}

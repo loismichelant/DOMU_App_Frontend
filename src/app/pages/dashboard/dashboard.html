@@ -1,0 +1,249 @@
+<!-- Loading -->
+<div *ngIf="isLoading" class="loading-container">
+</div>
+
+<!-- Dashboard -->
+<div *ngIf="!isLoading" class="dash-parent-container">
+
+  <div class="container-top">
+    <div class="header-left">
+      <h2 class="dash-title">DOMU Dashboard</h2>
+      <h3 class="dash-subtitle">Hello, {{ currentUser?.name }} !</h3>
+    </div>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="dashboard-layout">
+    
+    <!-- LEFT COLUMN -->
+     <div class="sidebar">
+
+      <!-- USERS -->
+      <div class="sidebar-section">
+        <h3>Roommates</h3>
+        <ul>
+          <li *ngFor="let user of users">
+            {{ user.name }}
+          </li>
+        </ul>
+      </div>
+      
+      <!-- CREATE TASK -->
+      <div class="sidebar-section">
+        <h3>Add a Task</h3>
+
+        <input class="dash-input" [(ngModel)]="title" placeholder="Title" />
+        <input class="dash-input" [(ngModel)]="description" placeholder="Description" />
+
+        <select class="dash-input" [(ngModel)]="assignedTo">
+          <option value="">-- Choose a roommie --</option>
+          <option *ngFor="let user of allUsers" [ngValue]="user.id">
+            {{ user.id === currentUser?.id ? 'Me (' + user.name + ')' : user.name }}
+          </option>
+        </select>
+
+        <button (click)="createTask()">Create Task</button>
+      </div>
+
+      <!-- CREATE EXPENSE -->
+      <div class="sidebar-section">
+        <h3>Add an Expense</h3>
+
+        <input class="dash-input" [(ngModel)]="expenseTitle" placeholder="Title" />
+        <input class="dash-input" [(ngModel)]="amount" type="number" placeholder="Amount" />
+
+        <select class="dash-input" [(ngModel)]="paidBy">
+          <option value="">-- Who paid for it ? --</option>
+          <option *ngFor="let user of allUsers" [value]="user.id">
+            {{ user.id === currentUser?.id ? 'Me (' + user.name + ')' : user.name }}
+          </option>
+        </select>
+
+        <h4>Split between :</h4>
+        <div *ngFor="let user of allUsers">
+          <label>
+            <input 
+              type="checkbox"
+              [value]="user.id"
+              (change)="onSplitChange($event, user.id)"
+            />
+            {{ user.id === currentUser?.id ? 'Me (' + user.name + ')' : user.name }}
+          </label>
+        </div>
+
+        <button (click)="createExpense()">Create Expense</button>
+      </div>
+
+     </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="content">
+
+    <!-- TASKS -->
+    <div class="card">
+      <h3>Tasks</h3>
+
+      <div class="task-list">
+
+        @for (task of tasks; track task._id) {
+          <div class="task-row">
+
+            <!-- LEFT CONTENT -->
+            <div class="task-info">
+
+              @if (editingTaskId === task._id) {
+
+                <input [(ngModel)]="editTitle" />
+                <input [(ngModel)]="editDescription" />
+
+                <select [(ngModel)]="editAssignedTo">
+                  <option *ngFor="let user of allUsers" [value]="user.id">
+                    {{ user.name }}
+                  </option>
+                </select>
+
+              } @else {
+
+                <span class="task-title">{{ task.title }}</span>
+                <span class="task-desc">{{ task.description }}</span>
+                <span class="task-user">{{ task.assignedTo?.name }}</span>
+
+              }
+
+            </div>
+
+            <!-- RIGHT ACTIONS -->
+            <div class="task-actions">
+
+              @if (editingTaskId === task._id) {
+
+                <button (click)="saveTask(task._id)">
+                  <img src="/save.png" alt="save" />
+                </button>
+
+              } @else {
+
+                <button (click)="startEditTask(task)">
+                  <img src="/edit.png" alt="edit" />
+                </button>
+
+                <button (click)="deleteTask(task._id)">
+                  <img src="/delete.png" alt="delete" />
+                </button>
+
+                <button (click)="toggleTaskStatus(task)">
+                  <img 
+                    [src]="task.status === 'done' ? '/check.png' : '/check_empty.png'" 
+                    alt="status"
+                  />
+                </button>
+
+              }
+
+            </div>
+
+          </div>
+        }
+
+      </div>
+    </div>
+
+    <!-- EXPENSES -->
+    <div class="card">
+      <h3>Expenses</h3>
+
+      <div class="debts-box">
+        <h4>Who owes who?</h4>
+        <div *ngFor="let d of debts" class="debt-item">
+          {{ d.from }} owes <span class="debt-amount">{{ d.amount }}$</span> to {{ d.to }}
+       </div>
+      </div>
+
+      <div class="expense-list">
+
+        @for (expense of expenses; track expense._id) {
+          <div class="expense-row">
+
+            <!-- LEFT -->
+            <div class="expense-info">
+
+              @if (editingExpenseId === expense._id) {
+
+                <input [(ngModel)]="editExpenseTitle" />
+                <input [(ngModel)]="editAmount" type="number" />
+
+                <select [(ngModel)]="editPaidBy">
+                  <option *ngFor="let user of allUsers" [value]="user.id">
+                    {{ user.name }}
+                  </option>
+                </select>
+
+                <h4>Split between:</h4>
+
+                <div class="split-edit">
+                  <label *ngFor="let user of allUsers" class="split-option">
+                    <input 
+                      type="checkbox"
+                      [checked]="editSplitBetween.includes(user.id)"
+                      (change)="onEditSplitChange($event, user.id)"
+                    />
+                    {{ user.id === currentUser?.id ? 'Me (' + user.name + ')' : user.name }}
+                  </label>
+                </div>
+
+              } @else {
+
+                <span class="expense-title">{{ expense.title }}</span>
+                <span class="expense-user">
+                  Paid by {{ expense.paidBy?.name }}
+                </span>
+                <span class="expense-amount">
+                  {{ expense.amount }}$
+                </span>
+                
+                <div class="expense-split">
+                  <span class="split-label">Split between:</span>
+
+                  <span class="split-user" *ngFor="let user of expense.splitBetween">
+                    {{ user.name }}
+                  </span>
+                </div>
+              
+
+              }
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="expense-actions">
+
+              @if (editingExpenseId === expense._id) {
+
+                <button (click)="saveExpense(expense._id)">
+                  <img src="/save.png" />
+                </button>
+
+              } @else {
+
+                <button (click)="startEditExpense(expense)">
+                  <img src="/edit.png" />
+                </button>
+
+                <button (click)="deleteExpense(expense._id)">
+                  <img src="/delete.png" />
+                </button>
+
+              }
+
+            </div>
+
+          </div>
+        }
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>

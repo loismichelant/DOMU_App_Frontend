@@ -1,0 +1,13 @@
+<div class="parent-container">
+    <div class="container-form">
+        <h2 class="form-title">DOMU</h2>
+
+        <input class="form-input" [(ngModel)]="name" placeholder="Name" />
+        <input class="form-input" [(ngModel)]="email" placeholder="Email" />
+        <input class="form-input" [(ngModel)]="password" type="password" placeholder="Password" />
+
+        <button class="form-button" (click)="register()">Register</button>
+
+        <p class="form-link">Already got an account ? <a class="form-link-a" routerLink="/">Login</a></p>
+    </div>
+</div>
