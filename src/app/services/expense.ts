@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
 
-  private api = 'https://domu-app-be.onrender.com';
+  private api = 'https://domu-app.onrender.com';
 
   constructor(private http: HttpClient) {}
 

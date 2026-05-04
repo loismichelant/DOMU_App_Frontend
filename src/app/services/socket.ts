@@ -6,7 +6,7 @@ export class SocketService {
   private socket: Socket;
 
   constructor() {
-    this.socket = io('https://domu-app-be.onrender.com');
+    this.socket = io('https://domu-app.onrender.com');
   }
 
   onTaskCreated(callback: any) {
