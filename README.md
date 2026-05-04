@@ -1,59 +1,117 @@
-# DOMUAPPFE
+# DOMU App : Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+https://domu-app-frontend.onrender.com
 
-## Development server
+---
 
-To start a local development server, run:
+## Description
+
+Frontend Angular de l’application **DOMU**, permettant:
+
+* Connexion / inscription
+* Gestion des tâches
+* Gestion des dépenses
+* Visualisation des dettes
+* Interface en temps réel
+
+---
+
+## Technologies
+
+* Angular
+* TypeScript
+* RxJS
+* Socket.io-client
+* CSS
+
+---
+
+## Installation locale
 
 ```bash
+git clone https://github.com/loismichelant/DOMU_App_Frontend.git
+cd DOMU_App_Frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Application disponible sur:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
+## Configuration API
+
+Dans les services Angular:
+
+```ts
+private api = 'https://domu-app.onrender.com';
 ```
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Build production
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+Le build est généré dans:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```text
+dist/DOMU-APP-FE/browser
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Structure
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+src/
+  app/
+    components/
+    services/
+  styles.css
+```
+
+---
+
+## Fonctionnalités
+
+* Interface responsive simple
+* Création / modification / suppression de tâches
+* Gestion des dépenses partagées
+* Calcul des dettes en temps réel
+* WebSocket pour mise à jour instantanée
+* UX claire avec sidebar + dashboard
+
+---
+
+## Temps réel
+
+Connexion via Socket.io:
+
+* réception des nouvelles tâches
+* réception des nouvelles dépenses
+
+---
+
+## Configuration Render
+
+* Build command:
+  `npm install; npm run build`
+
+* Publish directory:
+  `dist/DOMU-APP-FE/browser`
+
+* Rewrite rule:
+  `/* & /index.html`
+
+---
+
+## Auteur
+
+Projet réalisé dans le cadre d’un projet académique.
